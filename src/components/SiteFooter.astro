@@ -1,0 +1,52 @@
+---
+import { SITE_TITLE } from "../consts";
+
+interface Props {
+  links: { label: string; href: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<footer class="footer">
+  <span>{SITE_TITLE}</span>
+  <nav>
+    {links.map(({ label, href }) => <a href={href}>{label}</a>)}
+  </nav>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 64px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .footer nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--text-secondary);
+  }
+
+  .footer a:hover {
+    color: var(--text-light);
+  }
+
+  @media (max-width: 720px) {
+    .footer {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+  }
+</style>

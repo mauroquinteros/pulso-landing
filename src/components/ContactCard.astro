@@ -1,0 +1,54 @@
+---
+import { CONTACT_EMAIL, CONTACT_HREF } from "../consts";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!-- Lifted out of the run of sections: it is the one thing on the policy page
+     a reader may need to act on. -->
+<div class="contact">
+  <h2>{title}</h2>
+  <p><slot /></p>
+  <a href={CONTACT_HREF}>{CONTACT_EMAIL}</a>
+</div>
+
+<style>
+  .contact {
+    margin-top: 56px;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(165deg, var(--card-top), var(--card-bottom));
+  }
+
+  .contact h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .contact p {
+    margin: 12px 0 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-light);
+  }
+
+  .contact a {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 720px) {
+    .contact {
+      padding: 24px;
+    }
+  }
+</style>

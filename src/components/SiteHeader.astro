@@ -1,0 +1,57 @@
+---
+import Brand from "./Brand.astro";
+
+interface Props {
+  links: { label: string; href: string }[];
+  /** The policy page needs a rule under the nav; the landing page does not. */
+  ruled?: boolean;
+}
+
+const { links, ruled = false } = Astro.props;
+---
+
+<header class:list={["nav", { ruled }]}>
+  <Brand />
+  <nav class="nav-links">
+    {links.map(({ label, href }) => <a href={href}>{label}</a>)}
+  </nav>
+</header>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 64px;
+  }
+
+  .ruled {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    /* 44px keeps the tap target honest on touch screens. */
+    min-height: 44px;
+    color: var(--text-light);
+  }
+
+  @media (max-width: 720px) {
+    .nav {
+      padding: 22px;
+    }
+
+    .nav-links {
+      gap: 20px;
+    }
+  }
+</style>

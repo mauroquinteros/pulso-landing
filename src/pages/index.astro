@@ -1,17 +1,137 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import StatusBadge from "../components/StatusBadge.astro";
+import Button from "../components/Button.astro";
+import PulseWave from "../components/PulseWave.astro";
+import { CONTACT_HREF, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
+const navLinks = [
+  { label: "Privacidad", href: "/privacy" },
+  { label: "Contacto", href: CONTACT_HREF },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <SiteHeader links={navLinks} />
+
+  <main class="hero">
+    <StatusBadge>En fase de prueba</StatusBadge>
+
+    <h1>Lleva el control de tu cartera de inversiones.</h1>
+
+    <p class="lead">
+      Registras tus movimientos - compras, ventas, dividendos y retiros - y Pulso
+      calcula el valor actual de tu cartera, su rendimiento y el detalle de cada
+      posición.
+    </p>
+
+    <p class="sub">
+      Los datos son tuyos: la app no se conecta a ningún banco ni bróker, no
+      mueve dinero y no muestra publicidad.
+    </p>
+
+    <div class="actions">
+      <Button href={CONTACT_HREF}>Contacto y soporte</Button>
+      <Button href="/privacy" variant="ghost">Política de privacidad</Button>
+    </div>
+
+    <p class="note">Pulso todavía no se distribuye públicamente.</p>
+  </main>
+
+  <PulseWave />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 62px 24px 0;
+  }
+
+  /* One restrained glow behind the headline, the accent at low alpha. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -340px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, 160vw);
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--accent-rgb) / 0.13),
+      rgb(var(--accent-rgb) / 0)
+    );
+    pointer-events: none;
+  }
+
+  .hero > :global(*) {
+    position: relative;
+  }
+
+  .hero h1 {
+    margin: 30px 0 0;
+    max-width: 900px;
+    font-size: clamp(2.375rem, 5.4vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.038em;
+    text-wrap: balance;
+  }
+
+  .lead {
+    margin: 26px 0 0;
+    max-width: 660px;
+    font-size: clamp(1rem, 1.4vw, 1.1875rem);
+    line-height: 1.68;
+    color: var(--text-light);
+    text-wrap: pretty;
+  }
+
+  .sub {
+    margin: 18px 0 0;
+    max-width: 620px;
+    font-size: clamp(0.9375rem, 1.2vw, 1rem);
+    line-height: 1.65;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 38px;
+  }
+
+  .note {
+    margin: 26px 0 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      align-items: flex-start;
+      text-align: left;
+      padding: 40px 22px 0;
+    }
+
+    .actions {
+      justify-content: stretch;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    /* :global reaches the <Button> children, which carry their own scope. */
+    .actions :global(.btn) {
+      flex-grow: 1;
+    }
+  }
+</style>

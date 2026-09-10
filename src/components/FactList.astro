@@ -1,0 +1,67 @@
+---
+interface Props {
+  /** Each fact leads with a bold claim, then the qualifier. */
+  items: { claim: string; detail: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="facts">
+  {
+    items.map(({ claim, detail }) => (
+      <li>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+        <span>
+          <strong>{claim}</strong> {detail}
+        </span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .facts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .facts li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  .facts svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    stroke: var(--accent);
+  }
+
+  .facts strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+</style>

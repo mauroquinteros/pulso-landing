@@ -1,0 +1,40 @@
+---
+// The mark's own waveform, stretched into a closing band.
+---
+
+<svg class="wave" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="var(--accent)" stop-opacity="0" />
+      <stop offset="0.28" stop-color="var(--accent)" stop-opacity="0.5" />
+      <stop offset="0.62" stop-color="var(--accent)" stop-opacity="0.95" />
+      <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M0 118 H236 L268 74 L296 154 L318 118 H520 L556 92 L584 140 L602 118 H796 L852 26 L906 168 L946 118 H1140 L1174 88 L1202 144 L1222 118 H1440"
+    fill="none"
+    stroke="url(#trace)"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+
+<style>
+  .wave {
+    display: block;
+    width: 100%;
+    /* Scales with the viewport so the band lands on the fold instead of just
+       past it; preserveAspectRatio="none" lets it stretch. */
+    height: clamp(88px, 14vh, 180px);
+    margin-top: 56px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 720px) {
+    .wave {
+      margin-top: 40px;
+    }
+  }
+</style>

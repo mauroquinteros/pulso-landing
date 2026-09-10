@@ -1,0 +1,28 @@
+---
+import { SITE_TITLE } from "../consts";
+---
+
+<a class="brand" href="/">
+  <img src="/logo.svg" alt="" width="34" height="34" />
+  <span>{SITE_TITLE}</span>
+</a>
+
+<style>
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand span {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+</style>

@@ -1,0 +1,60 @@
+/* Palette, type and radii are the app's own, lifted from constants/theme.ts and
+   app/_layout.tsx. Dark only, because app.json pins userInterfaceStyle to dark:
+   a light mode here would be a face the product does not have. */
+:root {
+  color-scheme: dark;
+
+  --bg: #0a0e27;
+  --surface: #111638;
+  --border: #1c224d;
+  --card-top: #141a42;
+  --card-bottom: #0f1433;
+
+  --accent: #00e5cc;
+  --accent-bright: #4fe9d6;
+  --accent-ink: #04211e;
+  /* Channels, so the accent can be tinted inline: rgb(var(--accent-rgb) / 0.07) */
+  --accent-rgb: 0 229 204;
+
+  --text: #ffffff;
+  --text-bright: #e8eaf2;
+  --text-light: #c5c9da;
+  --text-secondary: #8e8e93;
+
+  --font-sans:
+    "Manrope Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Every page is a column that fills the viewport, so whatever closes it — the
+   wave on the landing page, the footer on the policy page — lands on the fold
+   rather than just past it. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-bright);
+}
+
+/* Slotted content, so out of reach of BaseLayout's scoped styles. */
+main {
+  flex-grow: 1;
+}

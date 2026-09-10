@@ -1,0 +1,73 @@
+---
+interface Props {
+  columns: string[];
+  rows: string[][];
+}
+
+const { columns, rows } = Astro.props;
+---
+
+<div class="table-wrap">
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>{columns.map((column) => <th>{column}</th>)}</tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .table-wrap {
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(165deg, var(--card-top), var(--card-bottom));
+  }
+
+  /* The table keeps a min-width, so on a phone it scrolls inside its card
+     rather than squeezing three columns into 320px. */
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+  }
+
+  th {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: rgb(var(--accent-rgb) / 0.05);
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+  }
+
+  td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-light);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  td:first-child {
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
